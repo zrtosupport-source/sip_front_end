@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
+/*
+ * Ledger theme -- a trading-terminal palette (dark ink panels, a
+ * brass accent) rather than the generic light warm-cream or
+ * neon-green fintech defaults. Gain/loss colors are muted and used
+ * ONLY for actual positive/negative financial semantics, never as
+ * decoration.
+ *
+ * Fonts are system stacks, not next/font/google -- this keeps the
+ * app fully offline-buildable and avoids a runtime dependency on
+ * Google's font CDN being reachable. Swap in a self-hosted or
+ * next/font webfont later if you want a more distinctive display
+ * face; the stacks below are deliberately still serif/sans/mono,
+ * not "just Arial".
+ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-ink-950: #14171c;
+  --color-ink-900: #191d23;
+  --color-ink-800: #1e2229;
+  --color-ink-700: #262b33;
+  --color-ink-600: #333941;
+
+  --color-paper-100: #e7e4dc;
+  --color-paper-300: #b9b6ac;
+  --color-paper-500: #8b8a83;
+
+  --color-brass-400: #d9ae66;
+  --color-brass-500: #c99a4b;
+  --color-brass-600: #a97e38;
+
+  --color-gain-500: #4fa377;
+  --color-gain-600: #3e8f63;
+
+  --color-loss-500: #d16b5e;
+  --color-loss-600: #c1554a;
+
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas,
+    monospace;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-ink-950: var(--color-ink-950);
+  --color-ink-900: var(--color-ink-900);
+  --color-ink-800: var(--color-ink-800);
+  --color-ink-700: var(--color-ink-700);
+  --color-ink-600: var(--color-ink-600);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-paper-100: var(--color-paper-100);
+  --color-paper-300: var(--color-paper-300);
+  --color-paper-500: var(--color-paper-500);
+
+  --color-brass-400: var(--color-brass-400);
+  --color-brass-500: var(--color-brass-500);
+  --color-brass-600: var(--color-brass-600);
+
+  --color-gain-500: var(--color-gain-500);
+  --color-gain-600: var(--color-gain-600);
+
+  --color-loss-500: var(--color-loss-500);
+  --color-loss-600: var(--color-loss-600);
+
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ink-950);
+  color: var(--color-paper-100);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brass-400);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
